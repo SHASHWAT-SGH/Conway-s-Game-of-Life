@@ -5,13 +5,11 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import color from '../constants/color';
+import createEmptyGrid from '../utils/createEmptyGrid';
 
-const numRows = 20;
-const numCols = 20;
-
-const createEmptyGrid = () => {
-  return Array.from({length: numRows}).map(() => Array(numCols).fill(0));
-};
+import gridData from '../constants/GridData';
+const numRows = gridData.numRows;
+const numCols = gridData.numCols;
 
 const getNextGeneration = grid => {
   const newGrid = createEmptyGrid();
@@ -56,10 +54,7 @@ const getNextGeneration = grid => {
   return newGrid;
 };
 
-const Grid = ({isCreator}) => {
-  const [grid, setGrid] = useState(createEmptyGrid());
-  const [isStart, setIsStart] = useState(false);
-
+const Grid = ({isCreator, isStart, grid, setGrid}) => {
   useEffect(() => {
     if (!isStart) {
       return;
@@ -69,56 +64,18 @@ const Grid = ({isCreator}) => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isStart]);
-
-  // useEffect(() => {
-  //   console.log(isCreator);
-  // }, [isCreator]);
-
-  // useEffect(() => {
-  //   console.log(grid);
-  // }, [grid]);
-
-  const generateRandomGrid = () => {
-    const newGrid = Array.from({length: numRows}).map(() =>
-      Array.from({length: numCols}).map(() => (Math.random() > 0.8 ? 1 : 0)),
-    );
-    setGrid(newGrid);
-  };
+  }, [isStart, setGrid]);
 
   const updateGrid = (row, column) => {
-    if (!isCreator) {
-      return;
-    }
     const newGrid = grid.map(r => r.slice());
     if (row >= 0 && row < numRows && column >= 0 && column < numCols) {
-      newGrid[row][column] = 1;
+      newGrid[row][column] = isCreator ? 1 : 0;
     }
     setGrid(newGrid);
-  };
-
-  const startGame = () => {
-    setIsStart(true);
   };
 
   return (
     <View style={styles.gameWrapper}>
-      <TouchableOpacity onPress={generateRandomGrid}>
-        <Text
-          style={{
-            backgroundColor: 'red',
-          }}>
-          generate random
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={startGame}>
-        <Text
-          style={{
-            backgroundColor: 'red',
-          }}>
-          start
-        </Text>
-      </TouchableOpacity>
       {grid &&
         grid.map((row, rowIndex) => {
           return (
@@ -160,6 +117,7 @@ const styles = StyleSheet.create({
     height: wp(4.5),
 
     borderWidth: wp(0.2),
+    borderColor: 'gray',
   },
   aliveCell: {
     backgroundColor: color.color3,
