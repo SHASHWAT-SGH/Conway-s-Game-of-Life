@@ -5,12 +5,13 @@
  * @format
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 
-import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
+import {Platform, SafeAreaView, StatusBar, useColorScheme} from 'react-native';
 
 import GameScreen from './screens/GameScreen';
 import color from './constants/color';
+import SplashScreen from 'react-native-splash-screen';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -19,6 +20,14 @@ function App(): React.JSX.Element {
     backgroundColor: color.color1,
     flex: 1,
   };
+
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      SplashScreen.hide();
+    }
+
+    return () => {};
+  }, []);
 
   return (
     <SafeAreaView style={backgroundStyle}>
