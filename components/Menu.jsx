@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: '800',
-    fontSize: hp(2.2),
+    fontSize: hp(2.1),
     textAlign: 'center',
   },
   startButton: {
@@ -120,9 +120,9 @@ const styles = StyleSheet.create({
     borderRadius: hp(0.4),
   },
   row2: {
-    paddingHorizontal: wp(9),
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
+    gap: wp(2),
   },
 });
