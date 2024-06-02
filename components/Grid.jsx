@@ -1,9 +1,6 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import React, {memo, useEffect} from 'react';
+import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import color from '../constants/color';
 import createEmptyGrid from '../utils/createEmptyGrid';
 
@@ -76,6 +73,7 @@ const Grid = ({isCreator, isStart, grid, setGrid}) => {
 
   return (
     <View style={styles.gameWrapper}>
+      {/* {console.log('Grid loaded')} */}
       {grid &&
         grid.map((row, rowIndex) => {
           return (
@@ -101,13 +99,13 @@ const Grid = ({isCreator, isStart, grid, setGrid}) => {
   );
 };
 
-export default Grid;
+export default memo(Grid);
 
 const styles = StyleSheet.create({
   gameWrapper: {
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 0.8,
+    flex: 1,
   },
   row: {
     flexDirection: 'row',

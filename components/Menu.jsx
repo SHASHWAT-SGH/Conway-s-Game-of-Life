@@ -1,5 +1,5 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -31,6 +31,7 @@ const Menu = ({setIsCreator, isCreator, setIsStart, isStart, setGrid}) => {
 
   return (
     <>
+      {/* {console.log('Menu loaded')} */}
       <View style={styles.container}>
         <View style={styles.row1}>
           <TouchableOpacity
@@ -78,7 +79,7 @@ const Menu = ({setIsCreator, isCreator, setIsStart, isStart, setGrid}) => {
   );
 };
 
-export default Menu;
+export default memo(Menu);
 
 const styles = StyleSheet.create({
   container: {
@@ -87,10 +88,11 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    minHeight: wp(10),
+    // minHeight: wp(10),
     paddingVertical: hp(2),
     paddingHorizontal: hp(1),
     gap: wp(2),
+    flex: 1,
   },
   row1: {
     flexDirection: 'row',
