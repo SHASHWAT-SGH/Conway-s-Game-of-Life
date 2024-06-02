@@ -1,16 +1,7 @@
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React, {memo, useCallback, useEffect} from 'react';
-import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
-import color from '../constants/color';
 import getNextGeneration from '../utils/getNextGeneration';
-
-const Cell = React.memo(({row, column, value, updateGrid}) => (
-  <TouchableOpacity onPress={() => updateGrid(row, column)}>
-    <View
-      style={[styles.cell, value === 1 ? styles.aliveCell : styles.deadCell]}
-    />
-  </TouchableOpacity>
-));
+import Cell from './Cell';
 
 const Grid = ({isCreator, isStart, grid, setGrid}) => {
   useEffect(() => {
@@ -75,18 +66,5 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-  },
-  cell: {
-    width: wp(4.5),
-    height: wp(4.5),
-
-    borderWidth: wp(0.2),
-    borderColor: 'gray',
-  },
-  aliveCell: {
-    backgroundColor: color.color3,
-  },
-  deadCell: {
-    backgroundColor: color.color1,
   },
 });
