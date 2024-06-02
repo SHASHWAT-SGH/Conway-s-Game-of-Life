@@ -1,6 +1,6 @@
 # Link for APK
 
-[**Click here to download APK**](https://drive.google.com/file/d/15G0L-wkRs4IYl18e9ks64trPOC0O57S_/view?usp=sharing)
+[**Click here to download APK**](drive.google.com/drive/folders/10sGLzLeyHw99plsyUiyQXqBaHWZfIMtI)
 
 # UI Screenshots
 
