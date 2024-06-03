@@ -1,3 +1,5 @@
+import 'react-native-gesture-handler';
+import {NavigationContainer} from '@react-navigation/native';
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -13,6 +15,7 @@ import GameScreen from './screens/GameScreen';
 import color from './constants/color';
 import SplashScreen from 'react-native-splash-screen';
 import OptionsScreen from './screens/OptionsScreen';
+import RootNavigator from './navigators/RootNavigator';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -31,14 +34,17 @@ function App(): React.JSX.Element {
   }, []);
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={color.color2}
-      />
-      <GameScreen />
-      {/* <OptionsScreen /> */}
-    </SafeAreaView>
+    <NavigationContainer>
+      <SafeAreaView style={backgroundStyle}>
+        <StatusBar
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+          backgroundColor={color.color2}
+        />
+
+        <RootNavigator />
+        {/* <OptionsScreen /> */}
+      </SafeAreaView>
+    </NavigationContainer>
   );
 }
 

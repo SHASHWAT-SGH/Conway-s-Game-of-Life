@@ -2,6 +2,7 @@ import {StyleSheet, View} from 'react-native';
 import React, {memo, useCallback, useEffect} from 'react';
 import getNextGeneration from '../utils/getNextGeneration';
 import Cell from './Cell';
+import color from '../constants/color';
 
 const Grid = ({isCreator, isStart, grid, setGrid}) => {
   useEffect(() => {
@@ -63,6 +64,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
+    backgroundColor: color.color1,
   },
   row: {
     flexDirection: 'row',

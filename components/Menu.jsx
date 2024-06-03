@@ -9,10 +9,13 @@ import color from '../constants/color';
 import gridData from '../constants/GridData';
 import createEmptyGrid from '../utils/createEmptyGrid';
 import Button from './Button';
+import {useNavigation} from '@react-navigation/native';
 const numRows = gridData.numRows;
 const numCols = gridData.numCols;
 
 const Menu = ({setIsCreator, isCreator, setIsStart, isStart, setGrid}) => {
+  const navigation = useNavigation();
+
   const toggleStart = () => {
     setIsStart(prev => !prev);
   };
@@ -78,7 +81,12 @@ const Menu = ({setIsCreator, isCreator, setIsStart, isStart, setGrid}) => {
 
         <View style={styles.row2}>
           <Button text={'Save'} />
-          <Button text={'View Saved'} />
+          <Button
+            text={'View Saved'}
+            onPress={() => {
+              navigation.push('OptionsScreen');
+            }}
+          />
         </View>
       </View>
     </>
