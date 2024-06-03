@@ -1,21 +1,26 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
+import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import color from '../constants/color';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import loadGrid from '../utils/loadGrid';
+import deleteGrid from '../utils/deleteGrid';
 
-const Card = () => {
+const Card = ({name}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Card</Text>
+      <Text style={styles.text}>{name}</Text>
       <View style={styles.buttonsWrapper}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            loadGrid('1');
+          }}>
           <Text style={styles.text}>Load</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            deleteGrid('1');
+          }}>
           <Text style={styles.text}>Delete</Text>
         </TouchableOpacity>
       </View>

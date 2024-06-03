@@ -10,6 +10,7 @@ import gridData from '../constants/GridData';
 import createEmptyGrid from '../utils/createEmptyGrid';
 import Button from './Button';
 import {useNavigation} from '@react-navigation/native';
+import saveGrid from '../utils/saveGrid';
 const numRows = gridData.numRows;
 const numCols = gridData.numCols;
 
@@ -80,7 +81,16 @@ const Menu = ({setIsCreator, isCreator, setIsStart, isStart, setGrid}) => {
         </View>
 
         <View style={styles.row2}>
-          <Button text={'Save'} />
+          <Button
+            text={'Save'}
+            onPress={() => {
+              saveGrid('1', [
+                [0, 0],
+                [0, 0],
+                [0, 0],
+              ]);
+            }}
+          />
           <Button
             text={'View Saved'}
             onPress={() => {
