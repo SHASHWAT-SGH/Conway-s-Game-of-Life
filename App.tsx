@@ -12,6 +12,7 @@ import {Platform, SafeAreaView, StatusBar, useColorScheme} from 'react-native';
 import GameScreen from './screens/GameScreen';
 import color from './constants/color';
 import SplashScreen from 'react-native-splash-screen';
+import OptionsScreen from './screens/OptionsScreen';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -36,6 +37,7 @@ function App(): React.JSX.Element {
         backgroundColor={color.color2}
       />
       <GameScreen />
+      {/* <OptionsScreen /> */}
     </SafeAreaView>
   );
 }

@@ -8,6 +8,7 @@ import color from '../constants/color';
 
 import gridData from '../constants/GridData';
 import createEmptyGrid from '../utils/createEmptyGrid';
+import Button from './Button';
 const numRows = gridData.numRows;
 const numCols = gridData.numCols;
 
@@ -33,7 +34,7 @@ const Menu = ({setIsCreator, isCreator, setIsStart, isStart, setGrid}) => {
     <>
       {/* {console.log('Menu loaded')} */}
       <View style={styles.container}>
-        <View style={styles.row1}>
+        <View style={styles.row2}>
           <TouchableOpacity
             style={[styles.button, isCreator ? {opacity: 1} : {opacity: 0.5}]}
             onPress={() => {
@@ -74,6 +75,11 @@ const Menu = ({setIsCreator, isCreator, setIsStart, isStart, setGrid}) => {
             </View>
           </TouchableOpacity>
         </View>
+
+        <View style={styles.row2}>
+          <Button text={'Save'} />
+          <Button text={'View Saved'} />
+        </View>
       </View>
     </>
   );
@@ -84,10 +90,10 @@ export default memo(Menu);
 const styles = StyleSheet.create({
   container: {
     backgroundColor: color.color2,
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
+    // position: 'absolute',
+    // bottom: 0,
+    // left: 0,
+    // right: 0,
     // minHeight: wp(10),
     paddingVertical: hp(2),
     paddingHorizontal: hp(1),
@@ -125,5 +131,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: wp(2),
+  },
+  row3: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
   },
 });

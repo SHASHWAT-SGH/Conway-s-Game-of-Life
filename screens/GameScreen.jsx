@@ -24,7 +24,7 @@ const GameScreen = () => {
           setGrid={setGrid}
         />
       </View>
-      <View style={{flex: 1}}>
+      <View style={{flex: 1.8}}>
         <Menu
           setIsCreator={setIsCreator}
           isCreator={isCreator}
