@@ -1,4 +1,4 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Header from '../components/Header';
 import Button from '../components/Button';
@@ -37,14 +37,23 @@ const OptionsScreen = () => {
         <View style={styles.headingConatiner}>
           <Text style={styles.heading}>Saved Patterns</Text>
         </View>
-        <View style={styles.cardsContainer}>
-          <FlatList
-            data={data}
-            renderItem={({item}) => <Card name={item.key} />}
-            keyExtractor={item => item.key}
-            style={styles.flatList}
-          />
-        </View>
+        {data && data.length > 0 ? (
+          <View style={styles.cardsContainer}>
+            <FlatList
+              data={data}
+              renderItem={({item}) => <Card name={item.key} />}
+              keyExtractor={item => item.key}
+              style={styles.flatList}
+            />
+          </View>
+        ) : (
+          <View style={styles.noDataWrapper}>
+            <Image
+              source={require('../assets/pngtree-no-data-yet-image_2238450.png')}
+              style={styles.image}
+            />
+          </View>
+        )}
       </View>
     </View>
   );
@@ -73,5 +82,15 @@ const styles = StyleSheet.create({
   flatList: {
     flex: 1,
     // backgroundColor: 'green',
+  },
+  noDataWrapper: {
+    flex: 1,
+    marginTop: hp(18),
+    alignItems: 'center',
+  },
+  image: {
+    // flex: 0.8,
+    width: 150,
+    height: 150,
   },
 });

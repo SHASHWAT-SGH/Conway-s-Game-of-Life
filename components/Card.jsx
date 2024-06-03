@@ -5,21 +5,28 @@ import color from '../constants/color';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import loadGrid from '../utils/loadGrid';
 import deleteGrid from '../utils/deleteGrid';
+import {useNavigation} from '@react-navigation/native';
 
 const Card = ({name}) => {
+  const navigation = useNavigation();
+
+  const asyncLoadAndNavigate = async () => {
+    const array = await loadGrid(name);
+    navigation.navigate('GameScreen', {
+      grid: array,
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{name}</Text>
       <View style={styles.buttonsWrapper}>
-        <TouchableOpacity
-          onPress={() => {
-            loadGrid('1');
-          }}>
+        <TouchableOpacity onPress={asyncLoadAndNavigate}>
           <Text style={styles.text}>Load</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            deleteGrid('1');
+            deleteGrid(name);
           }}>
           <Text style={styles.text}>Delete</Text>
         </TouchableOpacity>

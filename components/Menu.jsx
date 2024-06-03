@@ -14,7 +14,14 @@ import saveGrid from '../utils/saveGrid';
 const numRows = gridData.numRows;
 const numCols = gridData.numCols;
 
-const Menu = ({setIsCreator, isCreator, setIsStart, isStart, setGrid}) => {
+const Menu = ({
+  setIsCreator,
+  isCreator,
+  setIsStart,
+  isStart,
+  setGrid,
+  setShowInput,
+}) => {
   const navigation = useNavigation();
 
   const toggleStart = () => {
@@ -84,13 +91,19 @@ const Menu = ({setIsCreator, isCreator, setIsStart, isStart, setGrid}) => {
           <Button
             text={'Save'}
             onPress={() => {
+              setShowInput(true);
+            }}
+          />
+          {/* <Button
+            text={'Save'}
+            onPress={() => {
               saveGrid('1', [
                 [0, 0],
                 [0, 0],
                 [0, 0],
               ]);
             }}
-          />
+          /> */}
           <Button
             text={'View Saved'}
             onPress={() => {
