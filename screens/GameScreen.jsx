@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {StyleSheet, TextInput, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Grid from '../components/Grid';
 import Menu from '../components/Menu';
@@ -40,6 +40,7 @@ const GameScreen = ({route}) => {
               <TextInput
                 style={styles.input}
                 onChangeText={onChangeText}
+                onChange={onChangeText}
                 value={text}
                 maxLength={25}
                 placeholder="Enter name"
@@ -50,6 +51,7 @@ const GameScreen = ({route}) => {
                   text={'Save'}
                   onPress={() => {
                     saveGrid(text, grid);
+
                     setShowInput(false);
                   }}
                 />

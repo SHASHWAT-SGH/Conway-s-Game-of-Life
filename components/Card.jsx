@@ -1,37 +1,44 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import color from '../constants/color';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import loadGrid from '../utils/loadGrid';
 import deleteGrid from '../utils/deleteGrid';
 import {useNavigation} from '@react-navigation/native';
+import showToast from '../utils/toast';
 
 const Card = ({name}) => {
   const navigation = useNavigation();
+  const [deleted, setDeleted] = useState(false);
 
   const asyncLoadAndNavigate = async () => {
     const array = await loadGrid(name);
+    showToast('Loaded ' + name);
     navigation.navigate('GameScreen', {
       grid: array,
     });
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{name}</Text>
-      <View style={styles.buttonsWrapper}>
-        <TouchableOpacity onPress={asyncLoadAndNavigate}>
-          <Text style={styles.text}>Load</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            deleteGrid(name);
-          }}>
-          <Text style={styles.text}>Delete</Text>
-        </TouchableOpacity>
+    !deleted && (
+      <View style={styles.container}>
+        <Text style={styles.text}>{name}</Text>
+        <View style={styles.buttonsWrapper}>
+          <TouchableOpacity onPress={asyncLoadAndNavigate}>
+            <Text style={styles.text}>Load</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              deleteGrid(name);
+              setDeleted(true);
+              showToast('Deleted ' + name);
+            }}>
+            <Text style={styles.text}>Delete</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    )
   );
 };
 
