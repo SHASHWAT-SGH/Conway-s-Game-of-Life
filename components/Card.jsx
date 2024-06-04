@@ -8,7 +8,7 @@ import deleteGrid from '../utils/deleteGrid';
 import {useNavigation} from '@react-navigation/native';
 import showToast from '../utils/toast';
 
-const Card = ({name}) => {
+const Card = ({name, isDeletable, grid}) => {
   const navigation = useNavigation();
   const [deleted, setDeleted] = useState(false);
 
@@ -20,22 +20,32 @@ const Card = ({name}) => {
     });
   };
 
+  const navigateWithGridData = () => {
+    showToast('Loaded ' + name);
+    navigation.navigate('GameScreen', {
+      grid: grid,
+    });
+  };
+
   return (
     !deleted && (
       <View style={styles.container}>
         <Text style={styles.text}>{name}</Text>
         <View style={styles.buttonsWrapper}>
-          <TouchableOpacity onPress={asyncLoadAndNavigate}>
+          <TouchableOpacity
+            onPress={isDeletable ? asyncLoadAndNavigate : navigateWithGridData}>
             <Text style={styles.text}>Load</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              deleteGrid(name);
-              setDeleted(true);
-              showToast('Deleted ' + name);
-            }}>
-            <Text style={styles.text}>Delete</Text>
-          </TouchableOpacity>
+          {isDeletable && (
+            <TouchableOpacity
+              onPress={() => {
+                deleteGrid(name);
+                setDeleted(true);
+                showToast('Deleted ' + name);
+              }}>
+              <Text style={styles.text}>Delete</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     )

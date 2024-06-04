@@ -21,6 +21,7 @@ const Menu = ({
   isStart,
   setGrid,
   setShowInput,
+  setText,
 }) => {
   const navigation = useNavigation();
 
@@ -92,21 +93,13 @@ const Menu = ({
             text={'Save'}
             onPress={() => {
               setShowInput(true);
+              setText('');
             }}
           />
-          {/* <Button
-            text={'Save'}
-            onPress={() => {
-              saveGrid('1', [
-                [0, 0],
-                [0, 0],
-                [0, 0],
-              ]);
-            }}
-          /> */}
           <Button
             text={'View Saved'}
             onPress={() => {
+              setIsStart(false);
               navigation.push('OptionsScreen');
             }}
           />

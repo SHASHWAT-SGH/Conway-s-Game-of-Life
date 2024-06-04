@@ -19,7 +19,7 @@ const GameScreen = ({route}) => {
 
   const [showInput, setShowInput] = useState(false);
 
-  const [text, onChangeText] = useState('');
+  const [text, setText] = useState('');
 
   useEffect(() => {
     if (route.params?.grid) {
@@ -39,8 +39,7 @@ const GameScreen = ({route}) => {
             <>
               <TextInput
                 style={styles.input}
-                onChangeText={onChangeText}
-                onChange={onChangeText}
+                onChangeText={setText}
                 value={text}
                 maxLength={25}
                 placeholder="Enter name"
@@ -80,6 +79,7 @@ const GameScreen = ({route}) => {
           isStart={isStart}
           setGrid={setGrid}
           setShowInput={setShowInput}
+          setText={setText}
         />
       </View>
     </View>

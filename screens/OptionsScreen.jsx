@@ -9,11 +9,13 @@ import {
 } from 'react-native-responsive-screen';
 import Card from '../components/Card';
 import getAllGrids from '../utils/getAllGrids';
+import defaultGrids from '../utils/defaultGrids';
 
 const OptionsScreen = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
 
   const handleAsyncFetch = async () => {
+    // console.log(defaultGrids);
     const arr = await getAllGrids();
     setData(arr);
   };
@@ -37,23 +39,29 @@ const OptionsScreen = () => {
         <View style={styles.headingConatiner}>
           <Text style={styles.heading}>Saved Patterns</Text>
         </View>
-        {data && data.length > 0 ? (
-          <View style={styles.cardsContainer}>
+
+        <View style={styles.cardsContainer}>
+          {
+            <FlatList
+              data={defaultGrids}
+              renderItem={({item}) => (
+                <Card name={item.key} isDeletable={false} grid={item.array} />
+              )}
+              keyExtractor={item => item.key}
+              style={[styles.flatList]}
+            />
+          }
+          {data && data.length > 0 && (
             <FlatList
               data={data}
-              renderItem={({item}) => <Card name={item.key} />}
+              renderItem={({item}) => (
+                <Card name={item.key} isDeletable={true} />
+              )}
               keyExtractor={item => item.key}
               style={styles.flatList}
             />
-          </View>
-        ) : (
-          <View style={styles.noDataWrapper}>
-            <Image
-              source={require('../assets/pngtree-no-data-yet-image_2238450.png')}
-              style={styles.image}
-            />
-          </View>
-        )}
+          )}
+        </View>
       </View>
     </View>
   );
@@ -77,10 +85,10 @@ const styles = StyleSheet.create({
     fontWeight: '800',
   },
   cardsContainer: {
-    flex: 1,
+    // flex: 1,
   },
   flatList: {
-    flex: 1,
+    // flex: 1,
     // backgroundColor: 'green',
   },
   noDataWrapper: {
